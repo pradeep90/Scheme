@@ -23,15 +23,30 @@
   (if (null? items)
       0
       (+ 1 (length (cdr items)))))
+;; (cons (list 2) (list 3 4))
 
 (length my-list)
+(not (pair? (list)))
 
 ;; Append l2 to l1
 (define (append l1 l2)
-  (if (null? l1)
-      l2
-      (cons (car l1) (append (cdr l1) l2))))
+  (define (convert-to-list l2)
+    (cond ((null? l2) l2)
+	  ((not (pair? l2)) (list l2))
+	  (else l2)))
+  
+  (cond ((null? l1) (convert-to-list l2))
+	((not (pair? l1)) (cons l1 (convert-to-list l2)))
+	(else (cons (car l1) (append (cdr l1) l2)))))
+
 (append my-list squares)
+(append (list) my-list)
+(append my-list (list))
+(append (list) (list))
+(append my-list 1)
+(append 1 my-list)
+(append 1 (list))
+
 
 
 ;; Return last-pair of a list

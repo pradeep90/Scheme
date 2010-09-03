@@ -1,0 +1,50 @@
+(define (is-prime? n)			;Prime tester
+  (define (test-prime-factor k)
+    (define (is-factor? k)
+      (= (remainder n k) 0))
+    (if (> (* k k) n)
+	#t
+	(if (is-factor? k)
+	    #f
+	    (test-prime-factor (+ k 1)))))
+  (test-prime-factor 2))
+
+(is-prime? 15)
+;; (runtime) didn't work 
+;; (display (runtime))
+;; (define (timed-prime-test n)
+;;   (newline)
+;;   (display n)
+;;   (start-timed-test n (runtime))
+
+(display (get-internal-real-time))
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+;  (newline)
+  (start-prime-test n (get-internal-real-time)))
+
+(define (start-prime-test n start-time)
+  (if (is-prime? n)
+      (report-prime n (get-internal-real-time) start-time)));(- (get-internal-real-time) start-time))))
+
+(define (report-prime n end-time start-time);elapsed-time)
+  (display " *** ")
+  ;; (display start-time)
+  ;; (newline)
+  ;; (display end-time)
+  ;; (newline)
+  (display (- end-time start-time))
+  #t)
+
+;  (display elapsed-time))
+
+(display (timed-prime-test 17))
+
+(define (search-for-primes n k)
+  (define (iter-search n k)
+    )
+  (if (= k 0)
+      (display "BYE")
+      ) 

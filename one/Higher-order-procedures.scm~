@@ -1,0 +1,85 @@
+;; Chapter 1 Problems
+;; Date : 11 Aug 2010
+;; Mainly higher-order procedures
+
+(define (factorial x)
+  (if (= x 1)
+      1
+      (* x (factorial (-1 x)))))
+
+(factorial 4)
+
+(define (factorial x)
+  (define (fact-iter fact i)
+    (if (= 1 i)
+	fact
+	(fact-iter (* i fact) (- i 1))))
+  (fact-iter 1 x))
+
+(factorial 4)
+
+(define (fast-exp b n)
+  (define (fast-exp-iter a b n)
+    (cond ((= n 0) a)
+	  ((= (remainder n 2) 1) (fast-exp-iter (* a b) b (- n 1)))
+	  ((fast-exp-iter a (* b b) (/ n 2)))))
+  (fast-exp-iter 1 b n))
+
+(fast-exp 2 5)
+(< 2 1)
+(define (is-prime? n)
+  (define (test-prime-factor k)
+    (define (is-factor? k)
+      (= (remainder n k) 0))
+    (if (> (* k k) n)
+	#t
+	(if (is-factor? k)
+	    #f
+	    (test-prime-factor (+ k 1)))))
+  (test-prime-factor 2))
+
+(is-prime? 15)
+(display (runtime))
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-timed-test n (runtime))
+
+(define (summation fn a next b)
+  (if (> a b)
+      0
+      (+ (fn a) (summation fn (next a) next b))))
+
+(summation (lambda (x) x) 1 (lambda (x) (+ 1 x)) 10)
+(/ 355 113)
+
+(define (double fn)
+  (lambda (x)
+    (fn (fn x))))
+(define (inc x)
+  (+ 1 x))
+(((double double) inc) 3)
+(((double (lambda (x) (+ (x) 4))) inc) 3)
+(inc (inc (inc (inc (inc (inc (inc (inc 3))))))))
+((double (inc (inc (inc (inc
+
+(define (new-double fn)
+  (lambda (x) (fn (fn (fn (fn x))))))
+
+((new-double inc) 3)
+(((double new-double) inc) 5)
+(((new-double new-double) inc) 5)
+
+
+(((double (double double)) inc) 4)
+(double double) 
+(((double (double double)) (lambda (x) (+ 1 x))) 5)
+
+      
+  
+  
+  
+  
+
+
+

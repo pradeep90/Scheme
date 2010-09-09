@@ -59,7 +59,7 @@
 (define x (list))
 (define y (cons (cdr (list 1))
 		(cdr (list 1))))
-(null? y))
+(null? y)
 (null? x)
 
 (cdr (list 1))
@@ -119,8 +119,7 @@
 	  (accumulate op init (cdr seq)))))
 
 (accumulate + 0 (list 1 2 3 4))
-
-
+(car (list))
 (define (accumulate-n op init seqs)
   (if (null? (car seqs))
       (list)
@@ -207,7 +206,7 @@
       (list)
       (cons a (enumerate-interval (+ 1 a)
 			      b))))
-(enumerate-interval 1 10)
+(enumerate-interval 1 1)
 
 (define (filter predicate seq)
   (if (null? seq)
